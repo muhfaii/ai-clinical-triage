@@ -1,4 +1,4 @@
-artefacts/*.pkl
+# artefacts/*.pkl  — committed so Railway can load them at startup
 data/*.csv
 __pycache__/
 *.pyc
