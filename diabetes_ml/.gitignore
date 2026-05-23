@@ -1,0 +1,4 @@
+artefacts/*.pkl
+data/*.csv
+__pycache__/
+*.pyc

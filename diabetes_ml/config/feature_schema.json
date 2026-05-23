@@ -1,0 +1,10 @@
+{
+  "gender":              {"type": "str",   "values": ["Male", "Female", "Other"]},
+  "age":                 {"type": "float", "range": [0.0, 120.0]},
+  "hypertension":        {"type": "int",   "values": [0, 1]},
+  "heart_disease":       {"type": "int",   "values": [0, 1]},
+  "smoking_history":     {"type": "str",   "values": ["never", "No Info", "current", "former", "not current", "ever"]},
+  "bmi":                 {"type": "float", "range": [10.0, 100.0]},
+  "HbA1c_level":         {"type": "float", "range": [3.5, 15.0]},
+  "blood_glucose_level": {"type": "float", "range": [60.0, 500.0]}
+}

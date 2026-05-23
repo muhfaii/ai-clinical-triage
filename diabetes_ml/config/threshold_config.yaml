@@ -1,0 +1,16 @@
+class_imbalance_ratio: 10.76
+clinical_rules:
+  blood_glucose_hard_flag: 200
+  hba1c_hard_flag: 6.5
+max_subgroup_auroc_gap: 0.05
+model_version: 1.0.0
+operating_threshold: 0.345
+performance_targets:
+  auprc: 0.8
+  auroc: 0.95
+  f2: 0.85
+  precision: 0.75
+  recall: 0.88
+risk_bands:
+  high: 0.5
+  moderate: 0.25
