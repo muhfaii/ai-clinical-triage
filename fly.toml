@@ -1,4 +1,4 @@
-app = 'clinical-ai'
+app = 'clinical-ai-muhfai'
 primary_region = 'sin'   # Singapore — closest to Malaysia
 
 [build]
