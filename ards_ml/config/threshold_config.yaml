@@ -1,0 +1,10 @@
+class_imbalance_ratio: 2.29
+max_subgroup_auroc_gap: 0.05
+model_version: 1.0.0
+operating_threshold: 0.3127
+performance_targets:
+  auprc: 0.7
+  auroc: 0.85
+  brier_score: 0.2
+  sensitivity: 0.8
+  specificity: 0.75

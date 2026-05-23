@@ -1,0 +1,22 @@
+{
+  "Age":                     {"type": "int",   "range": [18, 120]},
+  "Sex":                     {"type": "int",   "values": [0, 1]},
+  "BMI":                     {"type": "float", "range": [10.0, 80.0]},
+  "Smoking_Status":          {"type": "int",   "values": [0, 1, 2]},
+  "Hypertension":            {"type": "int",   "values": [0, 1]},
+  "Diabetes":                {"type": "int",   "values": [0, 1]},
+  "COPD":                    {"type": "int",   "values": [0, 1]},
+  "Cardiovascular_Disease":  {"type": "int",   "values": [0, 1]},
+  "Chronic_Kidney_Disease":  {"type": "int",   "values": [0, 1]},
+  "Liver_Disease":           {"type": "int",   "values": [0, 1]},
+  "Oxygen_Saturation":       {"type": "float", "range": [50.0, 100.0]},
+  "PaO2_FiO2_Ratio":         {"type": "float", "range": [50.0, 600.0]},
+  "Blood_Pressure_Systolic": {"type": "int",   "range": [60, 250]},
+  "Blood_Pressure_Diastolic":{"type": "int",   "range": [30, 150]},
+  "Heart_Rate":              {"type": "int",   "range": [30, 200]},
+  "Respiratory_Rate":        {"type": "int",   "range": [6, 60]},
+  "CRP_Level":               {"type": "float", "range": [0.0, 500.0]},
+  "D_Dimer":                 {"type": "float", "range": [0.0, 50.0]},
+  "Lactate_Level":           {"type": "float", "range": [0.1, 20.0]},
+  "Ventilation_Type":        {"type": "int",   "values": [0, 1, 2]}
+}
