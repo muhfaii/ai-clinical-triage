@@ -1,0 +1,40 @@
+import uuid
+
+import pandas as pd
+from fastapi import APIRouter, HTTPException
+
+from ..config import DISCLAIMER
+from ..models.common import PredictionResponse, RiskFactor, risk_level
+from ..models.stroke import StrokeInput
+from ..services import model_store
+
+router = APIRouter()
+
+
+@router.post("/stroke/predict", response_model=PredictionResponse)
+def predict_stroke(body: StrokeInput):
+    bundle = model_store.get("stroke")
+    if bundle is None:
+        raise HTTPException(503, "Stroke model not loaded")
+
+    record = body.model_dump()
+    X = pd.DataFrame([record])
+
+    prob = float(bundle.pipeline.predict_proba(X)[:, 1][0])
+    if getattr(bundle.pipeline, "_platt_calibrator", None) is not None:
+        import numpy as np
+        prob = float(bundle.pipeline._platt_calibrator.predict_proba(
+            np.array([[prob]])
+        )[:, 1][0])
+
+    factors = model_store.get_top_shap_factors(bundle, X)
+
+    return PredictionResponse(
+        prediction=int(prob >= bundle.threshold),
+        probability=round(prob, 4),
+        risk_level=risk_level(prob),
+        top_risk_factors=[RiskFactor(**f) for f in factors],
+        model_version=bundle.model_version,
+        disclaimer=DISCLAIMER,
+        request_id=str(uuid.uuid4()),
+    )
