@@ -1,0 +1,22 @@
+{
+  "age":                            {"type": "float", "range": [0, 120]},
+  "avg_glucose_level":              {"type": "float", "range": [50, 600]},
+  "bmi":                            {"type": "float", "range": [10, 100]},
+  "bmi_was_missing":                {"type": "int",   "values": [0, 1]},
+  "hypertension":                   {"type": "int",   "values": [0, 1]},
+  "heart_disease":                  {"type": "int",   "values": [0, 1]},
+  "ever_married":                   {"type": "int",   "values": [0, 1]},
+  "Residence_type":                 {"type": "int",   "values": [0, 1]},
+  "gender_Male":                    {"type": "int",   "values": [0, 1]},
+  "work_type_Never_worked":         {"type": "int",   "values": [0, 1]},
+  "work_type_Private":              {"type": "int",   "values": [0, 1]},
+  "work_type_Self-employed":        {"type": "int",   "values": [0, 1]},
+  "work_type_children":             {"type": "int",   "values": [0, 1]},
+  "smoking_status_Unknown":         {"type": "int",   "values": [0, 1]},
+  "smoking_status_formerly smoked": {"type": "int",   "values": [0, 1]},
+  "smoking_status_never smoked":    {"type": "int",   "values": [0, 1]},
+  "smoking_status_smokes":          {"type": "int",   "values": [0, 1]},
+  "age_hypertension":               {"type": "float", "range": [0, 120]},
+  "cardiometabolic_risk":           {"type": "int",   "values": [0, 1, 2]},
+  "glucose_bmi_ratio":              {"type": "float", "range": [0, 65]}
+}

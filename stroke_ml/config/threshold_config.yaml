@@ -1,0 +1,9 @@
+class_imbalance_ratio: 19.52
+max_subgroup_recall_gap: 0.1
+model_version: 1.0.0
+operating_threshold: 0.1
+performance_targets:
+  auprc: 0.4
+  auroc: 0.85
+  f2: 0.5
+  recall: 0.8
