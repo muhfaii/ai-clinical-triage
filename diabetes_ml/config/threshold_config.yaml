@@ -4,7 +4,7 @@ clinical_rules:
   hba1c_hard_flag: 6.5
 max_subgroup_auroc_gap: 0.05
 model_version: 1.0.0
-operating_threshold: 0.345
+operating_threshold: 0.31
 performance_targets:
   auprc: 0.8
   auroc: 0.95
