@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.git/
+.DS_Store
+# pkl files are intentionally NOT excluded — they must be in the image
