@@ -243,5 +243,38 @@ def run_triage_screen(
     })
 
 
+# ── Sit-to-Stand ───────────────────────────────────────────────────────────────
+
+@mcp.tool()
+def analyze_sit2stand(
+    frames_json: Annotated[str, Field(
+        description=(
+            "JSON array of pose keyframes. Each frame must have four keys — "
+            "'hip', 'knee', 'ankle', 'shoulder' — each a [x, y] coordinate pair "
+            "in any consistent unit (pixels, normalised 0–1, etc.). "
+            "Example: [{\"hip\":[320,400],\"knee\":[320,500],\"ankle\":[320,600],\"shoulder\":[320,250]}, ...]"
+        )
+    )],
+    frame_rate: Annotated[float, Field(description="Video frame rate in Hz (e.g. 30.0)")] = 30.0,
+) -> dict:
+    """
+    Analyse a sit-to-stand movement sequence from pose keyframes.
+
+    Returns rep count, mean movement time, trunk flexion angle, angular velocity,
+    per-rep breakdown, and clinical quality flags (excessive_trunk_flexion,
+    slow_movement, low_angular_velocity).
+
+    Frames must be extracted from video beforehand using a pose estimation tool
+    such as MediaPipe Pose or OpenPose.
+    """
+    import json
+    try:
+        frames = json.loads(frames_json)
+    except json.JSONDecodeError as e:
+        return {"error": f"Invalid frames_json: {e}"}
+
+    return _post("/api/v1/sit2stand/analyze", {"frames": frames, "frame_rate": frame_rate})
+
+
 if __name__ == "__main__":
     mcp.run()
