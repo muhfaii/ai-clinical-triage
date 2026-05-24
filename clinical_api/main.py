@@ -12,8 +12,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import ards, diabetes, health, heart_attack, sit2stand, stroke, triage
+from .routers import ards, chat, diabetes, health, heart_attack, sit2stand, stroke, triage
 from .services import model_store
+from triage_chat.agent import triage_agent
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
@@ -21,7 +22,9 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     model_store.load_all()
+    await triage_agent.start()
     yield
+    await triage_agent.stop()
 
 
 app = FastAPI(
@@ -45,3 +48,4 @@ app.include_router(diabetes.router, prefix="/api/v1", tags=["diabetes"])
 app.include_router(ards.router, prefix="/api/v1", tags=["ards"])
 app.include_router(triage.router, prefix="/api/v1", tags=["triage"])
 app.include_router(sit2stand.router, prefix="/api/v1", tags=["sit2stand"])
+app.include_router(chat.router, prefix="/api/v1", tags=["chat"])
