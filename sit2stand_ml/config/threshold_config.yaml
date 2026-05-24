@@ -1,0 +1,7 @@
+model_version: "1.0.0"
+
+# Clinical quality flags — values outside these ranges trigger a flag in the API response
+thresholds:
+  max_trunk_flexion_deg: 45.0       # excessive forward lean
+  max_movement_time_s: 3.0          # slow rise (>3 s per rep is clinically significant)
+  min_angular_velocity_deg_s: 30.0  # very slow angular movement may indicate weakness

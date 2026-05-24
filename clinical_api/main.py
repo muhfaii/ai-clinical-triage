@@ -12,7 +12,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import ards, diabetes, health, heart_attack, stroke, triage
+from .routers import ards, diabetes, health, heart_attack, sit2stand, stroke, triage
 from .services import model_store
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -44,3 +44,4 @@ app.include_router(heart_attack.router, prefix="/api/v1", tags=["heart_attack"])
 app.include_router(diabetes.router, prefix="/api/v1", tags=["diabetes"])
 app.include_router(ards.router, prefix="/api/v1", tags=["ards"])
 app.include_router(triage.router, prefix="/api/v1", tags=["triage"])
+app.include_router(sit2stand.router, prefix="/api/v1", tags=["sit2stand"])
