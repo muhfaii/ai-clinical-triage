@@ -1,6 +1,8 @@
-import os
+import logging
 from agents import Agent, Runner
 from agents.mcp import MCPServerStdio
+
+logger = logging.getLogger(__name__)
 
 SYSTEM_PROMPT = """You are a clinical triage assistant working alongside nurses at patient intake.
 
@@ -29,22 +31,34 @@ class TriageAgent:
         self._medical_mcp: MCPServerStdio | None = None
         self.agent: Agent | None = None
 
+    async def _try_start_server(self, server: MCPServerStdio, name: str) -> MCPServerStdio | None:
+        try:
+            await server.__aenter__()
+            logger.info("[triage_agent] %s MCP server started", name)
+            return server
+        except Exception as e:
+            logger.warning("[triage_agent] %s MCP server failed to start: %s", name, e)
+            return None
+
     async def start(self):
-        self._clinical_mcp = MCPServerStdio(
+        clinical = MCPServerStdio(
             params={"command": "python", "args": ["-m", "clinical_mcp.server"]},
             cache_tools_list=True,
         )
-        self._medical_mcp = MCPServerStdio(
+        medical = MCPServerStdio(
             params={"command": "npx", "args": ["-y", "medical-mcp"]},
             cache_tools_list=True,
         )
-        await self._clinical_mcp.__aenter__()
-        await self._medical_mcp.__aenter__()
+        self._clinical_mcp = await self._try_start_server(clinical, "clinical")
+        self._medical_mcp = await self._try_start_server(medical, "medical")
+
+        active_servers = [s for s in [self._clinical_mcp, self._medical_mcp] if s is not None]
         self.agent = Agent(
             name="Triage Assistant",
             instructions=SYSTEM_PROMPT,
-            mcp_servers=[self._clinical_mcp, self._medical_mcp],
+            mcp_servers=active_servers,
         )
+        logger.info("[triage_agent] ready with %d MCP server(s)", len(active_servers))
 
     async def stop(self):
         if self._clinical_mcp:

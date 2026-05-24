@@ -13,3 +13,4 @@ optuna>=3.0
 shap>=0.44
 imbalanced-learn>=0.11
 openai-agents>=0.0.19
+fastmcp>=2.0
